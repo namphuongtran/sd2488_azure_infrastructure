@@ -1,0 +1,14 @@
+# azure-pipeline.yml
+trigger:
+- main
+
+variables:
+  tag: '$(Build.BuildNumber)-$(Build.SourceBranchName)-$(Build.BuildId)'
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- template: build.yaml # Template reference to ci.yml
+  parameters:
+    buildTag: $(tag)
+    vmImage: $(vmImageName)
+- template: deploy.yaml # Template reference to cd.yml

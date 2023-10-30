@@ -1,0 +1,71 @@
+stages:
+- stage: CD
+  jobs:
+  - job: Release
+    displayName: Release
+    continueOnError: false
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: DownloadPipelineArtifact@2 # Use the Download Pipeline Artifact task
+      displayName: 'Download artifact'
+      inputs:
+        buildType: 'current'
+        targetPath: '$(Pipeline.Workspace)'
+        artifactName: 'drop-$(tag)'
+
+    - task: TerraformInstaller@1
+      displayName: 'Install Terraform'
+      inputs:
+        terraformVersion: 1.3.7
+
+    - powershell: "$env:TF_LOG = \"DEBUG\"\ndir \"$(Pipeline.Workspace)\" \n"
+      enabled: true
+
+    - task: TerraformTaskV4@4
+      displayName: 'Terraform : init'
+      inputs:
+        provider: 'azurerm'
+        workingDirectory: '$(Pipeline.Workspace)'
+        backendServiceArm: 'databricks-nonprod'
+        backendAzureRmResourceGroupName: 'rg-terraform-non-prod-weu'
+        backendAzureRmStorageAccountName: 'stteranonprodweu'
+        backendAzureRmContainerName: 'terraform-state'
+        backendAzureRmKey: 'terraform.tfstate'
+
+    - task: TerraformTaskV4@4
+      displayName: 'Terraform: validate - validation tf'
+      inputs:
+        command: validate
+        workingDirectory: '$(Pipeline.Workspace)'
+        provider: 'azurerm'
+        environmentServiceNameAzureRM: 'databricks-nonprod'
+
+    - task: TerraformTaskV4@4
+      displayName: 'Terraform: plan - list out resources'
+      inputs:
+        command: plan
+        workingDirectory: '$(Pipeline.Workspace)'
+        commandOptions: '-no-color'
+        provider: 'azurerm'
+        environmentServiceNameAzureRM: 'databricks-nonprod'
+      enabled: true
+
+    - task: TerraformTaskV4@4
+      displayName: 'Terraform: destroy - delete all resources'
+      inputs:
+        command: destroy
+        workingDirectory: '$(Pipeline.Workspace)'
+        provider: 'azurerm'
+        environmentServiceNameAzureRM: 'databricks-nonprod'
+      enabled: false
+
+    - task: TerraformTaskV4@4
+      displayName: 'Terraform : apply all tf files'
+      inputs:
+        command: apply
+        workingDirectory: '$(Pipeline.Workspace)'
+        commandOptions: '-no-color'
+        provider: 'azurerm'
+        environmentServiceNameAzureRM: 'databricks-nonprod'
+      enabled: true

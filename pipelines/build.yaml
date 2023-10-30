@@ -1,0 +1,29 @@
+parameters:
+- name: buildTag # defaults for any parameters that aren't specified
+  default: ''
+- name: vmImage
+  default: ''
+
+stages:
+- stage: CI
+  pool:
+    vmImage: ${{ parameters.vmImage }}
+  jobs:
+  - job: Build
+    displayName: Build
+    steps:
+    - checkout: self
+      clean: 'true'
+      path: s
+
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: "GIT_COMMIT=$(git rev-parse --short HEAD)\necho \"GIT_COMMIT: ${GIT_COMMIT}\"         \n# set env variable to allow next task to consume\necho \"##vso[task.setvariable variable=GIT_COMMIT]${GIT_COMMIT}\"\n"
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)'
+        ArtifactName: 'drop-${{ parameters.buildTag }}'
+        publishLocation: 'Container'
