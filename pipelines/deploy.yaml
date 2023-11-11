@@ -27,9 +27,9 @@ stages:
       inputs:
         provider: 'azurerm'
         workingDirectory: '$(Pipeline.Workspace)'
-        backendServiceArm: 'databricks-nonprod'
-        backendAzureRmResourceGroupName: 'rg-terraform-non-prod-weu'
-        backendAzureRmStorageAccountName: 'stteranonprodweu'
+        backendServiceArm: 'pisharp'
+        backendAzureRmResourceGroupName: 'rg-terrastate-non-prod-ase'
+        backendAzureRmStorageAccountName: 'stterrastatenonprodase'
         backendAzureRmContainerName: 'terraform-state'
         backendAzureRmKey: 'terraform.tfstate'
 
@@ -39,7 +39,7 @@ stages:
         command: validate
         workingDirectory: '$(Pipeline.Workspace)'
         provider: 'azurerm'
-        environmentServiceNameAzureRM: 'databricks-nonprod'
+        environmentServiceNameAzureRM: 'pisharp'
 
     - task: TerraformTaskV4@4
       displayName: 'Terraform: plan - list out resources'
@@ -48,7 +48,7 @@ stages:
         workingDirectory: '$(Pipeline.Workspace)'
         commandOptions: '-no-color'
         provider: 'azurerm'
-        environmentServiceNameAzureRM: 'databricks-nonprod'
+        environmentServiceNameAzureRM: 'pisharp'
       enabled: true
 
     - task: TerraformTaskV4@4
@@ -57,7 +57,7 @@ stages:
         command: destroy
         workingDirectory: '$(Pipeline.Workspace)'
         provider: 'azurerm'
-        environmentServiceNameAzureRM: 'databricks-nonprod'
+        environmentServiceNameAzureRM: 'pisharp'
       enabled: false
 
     - task: TerraformTaskV4@4
@@ -67,5 +67,5 @@ stages:
         workingDirectory: '$(Pipeline.Workspace)'
         commandOptions: '-no-color'
         provider: 'azurerm'
-        environmentServiceNameAzureRM: 'databricks-nonprod'
+        environmentServiceNameAzureRM: 'pisharp'
       enabled: true
