@@ -118,7 +118,7 @@ variable "system_vm_size" {
 
 variable "user_vm_size" {
   description = "The size of the Virtual Machine."
-  default     = "Standard_D1_v2"
+  default     = "Standard_D2_v2"
 }
 
 variable "max_pods" {
