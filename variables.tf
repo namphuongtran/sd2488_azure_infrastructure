@@ -1,31 +1,31 @@
 variable "region" {
   type        = string
   description = "the region that resource will be deployed"
-  default     = "southeastasia" #"West Europe"
+  default     = "West Europe"
 }
 
 variable "location" {
   type        = string
   description = "the short name for the location"
-  default     = "ase" #"weu"
+  default     = "weu"
 }
 
 variable "region_failover" {
   type        = string
   description = "the region that resource will be deployed"
-  default     = "West US" #"North Europe"
+  default     = "North Europe"
 }
 
 variable "region_short_failover" {
   type        = string
   description = "the short name for the location"
-  default     = "wus" #"neu"
+  default     = "neu"
 }
 
 variable "region_short_group" {
   type        = string
   description = "the short name for the location"
-  default     = "us" #"eu"
+  default     = "eu"
 }
 
 variable "admin_group_id" {
