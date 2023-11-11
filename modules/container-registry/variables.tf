@@ -24,3 +24,8 @@ variable "default_tags" {
   type = map(string)
   description = "the default tags of the resource"
 }
+
+variable "azure_kubernetes_rbac_administrators" {
+  type    = set(string)
+  default = ["a47b8321-604b-4c06-8672-ab68441cfc5b"]
+}
