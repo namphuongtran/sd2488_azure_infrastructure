@@ -62,7 +62,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
 resource "azurerm_kubernetes_cluster_node_pool" "application" {
   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
-  name                  = "application"
+  name                  = "user"
   enable_auto_scaling   = "false"
   enable_node_public_ip = "false"
   max_pods              = var.max_pods

@@ -1,13 +1,13 @@
 variable "region" {
   type        = string
   description = "the region that resource will be deployed"
-  default     = "East US" #"West Europe"
+  default     = "southeastasia" #"West Europe"
 }
 
 variable "location" {
   type        = string
   description = "the short name for the location"
-  default     = "eus" #"weu"
+  default     = "ase" #"weu"
 }
 
 variable "region_failover" {
