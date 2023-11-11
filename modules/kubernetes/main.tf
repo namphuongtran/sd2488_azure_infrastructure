@@ -59,26 +59,26 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   })
 }
+# Uncomment the code below if deploying to production or not use Free Trial license
+# resource "azurerm_kubernetes_cluster_node_pool" "application" {
+#   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
+#   name                  = "user"
+#   enable_auto_scaling   = "false"
+#   enable_node_public_ip = "false"
+#   max_pods              = var.max_pods
+#   node_count            = var.node_count
+#   vm_size               = var.user_vm_size
+#   os_disk_size_gb       = var.os_disk_size
+#   vnet_subnet_id        = var.vnet_subnet_id
+#   mode                  = "User"
+#   zones               = ["3"]
+#   lifecycle {
+#     # prevent_destroy = true
+#   }
 
-resource "azurerm_kubernetes_cluster_node_pool" "application" {
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
-  name                  = "user"
-  enable_auto_scaling   = "false"
-  enable_node_public_ip = "false"
-  max_pods              = var.max_pods
-  node_count            = var.node_count
-  vm_size               = var.user_vm_size
-  os_disk_size_gb       = var.os_disk_size
-  vnet_subnet_id        = var.vnet_subnet_id
-  mode                  = "User"
-  zones               = ["3"]
-  lifecycle {
-    # prevent_destroy = true
-  }
-
-  tags = merge(var.default_tags, {
-  })
-}
+#   tags = merge(var.default_tags, {
+#   })
+# }
 
 data "azurerm_resource_group" "node_rg" {
   name = azurerm_kubernetes_cluster.aks.node_resource_group
