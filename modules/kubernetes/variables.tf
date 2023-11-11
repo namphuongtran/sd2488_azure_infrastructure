@@ -88,7 +88,7 @@ variable "admin_group_id" {
 # object ID of the tenant. The Tenant of Azure Active Directory
 variable "tenant_id" {
   description = "The Tenant ID of Azure Active Directory which is located in the Basic information"
-  default = "cd885c9a-f02a-4c1f-b3e8-f89fd0a9c165"  
+  default = "66bfe9d6-53d1-4693-a655-098a28b5c46f"  
 }
 
 variable "aks_dns_prefix" {
@@ -146,20 +146,21 @@ variable "aks_docker_bridge_cidr" {
 
 variable  "devops_azure_cli_sp" {
   description = "The Object ID of the Service Principal that Azure-cli runs as"
-   default  = "53e29ca5-77b4-47b9-9893-d4bcd70ab91c"
-   # This is object id of sp-nash-non-prod-devops (enterprise apps)
+   default  = "0abeb6b1-6f8c-4b51-ab0e-3383d9053c28"
+   # This is object id of sp-devops-non-prod-ase (enterprise apps)
 }
 
 #Azure Kubernetes Service RBAC Admins
 variable "azure_kubernetes_rbac_administrators" {
   type    = set(string)
-  default = ["f8535c5c-e019-4c9b-87d3-c53ba6653576","904f3e6c-0c20-4536-b5ba-73b8b8575993"]
+  default = ["a47b8321-604b-4c06-8672-ab68441cfc5b"]
 }
 
 #Azure Kubernetes Service RBAC Cluster Admins
 variable "azure_kubernetes_rbac_cluster_administrators" {
   type    = set(string)
-  default = ["f8535c5c-e019-4c9b-87d3-c53ba6653576","904f3e6c-0c20-4536-b5ba-73b8b8575993"]
+  default = ["a47b8321-604b-4c06-8672-ab68441cfc5b"]
+  # a47b8321-604b-4c06-8672-ab68441cfc5b - nam.tranphuong@outlook.com
 }
 
 variable "authorized_ip_ranges" {

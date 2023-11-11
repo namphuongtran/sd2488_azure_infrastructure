@@ -31,7 +31,7 @@ variable "region_short_group" {
 variable "admin_group_id" {
   type        = string
   description = "The admin group id."
-  default = "9c51f8df-e94d-4c24-a30a-db5f518c1d3a"
+  default = "2d53ffff-d3cc-4b0a-89f9-e52e8c6a59e7"
 }
 
 variable "applications" {
