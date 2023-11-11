@@ -113,7 +113,7 @@ variable "aks_agent_count_windows" {
 
 variable "vm_size" {
   description = "The size of the Virtual Machine."
-  default     = "Standard_D3_v2"
+  default     = "Standard_D1_v2"
 }
 
 variable "max_pods" {
