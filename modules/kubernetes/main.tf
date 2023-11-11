@@ -37,7 +37,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vm_size               = var.vm_size
     os_disk_size_gb = var.os_disk_size
     vnet_subnet_id  = var.vnet_subnet_id
-    zones               = ["1", "2", "3"]#Message="The VM size of Standard_D3_v2 is only allowed  in zones [2] in your subscription in location 'westeurope'. "
+    zones               = ["3"]#Message="The VM size of Standard_D3_v2 is only allowed  in zones [2] in your subscription in location 'westeurope'. "
     type = "VirtualMachineScaleSets"
   }
 
@@ -71,7 +71,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "application" {
   os_disk_size_gb       = var.os_disk_size
   vnet_subnet_id        = var.vnet_subnet_id
   mode                  = "User"
-  zones               = ["1", "2", "3"]
+  zones               = ["3"]
   lifecycle {
     # prevent_destroy = true
   }
