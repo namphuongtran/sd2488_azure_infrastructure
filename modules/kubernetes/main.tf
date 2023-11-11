@@ -34,7 +34,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     enable_node_public_ip = "false"
     max_pods              = var.max_pods
     node_count            = var.node_count
-    vm_size               = var.vm_size
+    vm_size               = var.system_vm_size
     os_disk_size_gb = var.os_disk_size
     vnet_subnet_id  = var.vnet_subnet_id
     zones               = ["3"]#Message="The VM size of Standard_D3_v2 is only allowed  in zones [2] in your subscription in location 'westeurope'. "
@@ -67,7 +67,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "application" {
   enable_node_public_ip = "false"
   max_pods              = var.max_pods
   node_count            = var.node_count
-  vm_size               = var.vm_size
+  vm_size               = var.user_vm_size
   os_disk_size_gb       = var.os_disk_size
   vnet_subnet_id        = var.vnet_subnet_id
   mode                  = "User"

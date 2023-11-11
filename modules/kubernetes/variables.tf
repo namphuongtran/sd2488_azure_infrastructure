@@ -111,7 +111,12 @@ variable "aks_agent_count_windows" {
   default     = 0
 }
 
-variable "vm_size" {
+variable "system_vm_size" {
+  description = "The size of the Virtual Machine."
+  default     = "Standard_D2_v2"
+}
+
+variable "user_vm_size" {
   description = "The size of the Virtual Machine."
   default     = "Standard_D1_v2"
 }
